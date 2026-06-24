@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cool & Safe — كربلاء المقدسة</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ice: #00C6E0;
+    --ice-light: #E0F7FB;
+    --ice-dark: #0099B8;
+    --night: #0A1628;
+    --night-mid: #112240;
+    --slate: #1E3A5F;
+    --steel: #2D5986;
+    --white: #F8FCFF;
+    --muted: #7A9AB5;
+    --accent: #FFB800;
+    --green: #00D68F;
+    --radius: 16px;
+    --font-display: 'Cairo', sans-serif;
+    --font-body: 'Tajawal', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--night);
+    color: var(--white);
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; right: 0; left: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 5vw;
+    background: rgba(10, 22, 40, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0, 198, 224, 0.12);
+  }
+  .logo {
+    font-family: var(--font-display);
+    font-weight: 900; font-size: 1.4rem;
+    color: var(--white);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .logo span { color: var(--ice); }
+  .logo-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--ice), var(--ice-dark));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+  }
+  nav ul { list-style: none; display: flex; gap: 2rem; }
+  nav ul a {
+    text-decoration: none; color: var(--muted);
+    font-size: 0.95rem; font-weight: 500;
+    transition: color 0.2s;
+  }
+  nav ul a:hover { color: var(--ice); }
+  .nav-cta {
+    background: var(--ice); color: var(--night) !important;
+    padding: 8px 20px; border-radius: 30px;
+    font-weight: 700 !important;
+  }
+  .nav-cta:hover { background: var(--ice-dark) !important; color: var(--white) !important; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    padding: 120px 5vw 80px;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background: radial-gradient(ellipse 80% 60% at 20% 50%, rgba(0,198,224,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 50% at 80% 80%, rgba(0,153,184,0.08) 0%, transparent 60%),
+                var(--night);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; z-index: 0; opacity: 0.04;
+    background-image: linear-gradient(var(--ice) 1px, transparent 1px),
+                      linear-gradient(90deg, var(--ice) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  /* Floating circles */
+  .circle {
+    position: absolute; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,198,224,0.15), transparent 70%);
+    animation: float 8s ease-in-out infinite;
+  }
+  .c1 { width: 600px; height: 600px; top: -200px; left: -200px; animation-delay: 0s; }
+  .c2 { width: 300px; height: 300px; bottom: 0; right: 10%; animation-delay: 3s; }
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-30px); }
+  }
+
+  .hero-content { position: relative; z-index: 1; max-width: 650px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(0,198,224,0.12); border: 1px solid rgba(0,198,224,0.3);
+    color: var(--ice); padding: 6px 16px; border-radius: 30px;
+    font-size: 0.85rem; font-weight: 600; margin-bottom: 24px;
+  }
+  .hero-badge::before { content: '📍'; }
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    font-weight: 900; line-height: 1.15;
+    margin-bottom: 20px;
+  }
+  h1 .line1 { color: var(--white); display: block; }
+  h1 .line2 { color: var(--ice); display: block; }
+  .hero-desc {
+    color: var(--muted); font-size: 1.1rem;
+    max-width: 480px; margin-bottom: 40px;
+  }
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--ice), var(--ice-dark));
+    color: var(--night); border: none; cursor: pointer;
+    padding: 14px 32px; border-radius: 40px;
+    font-family: var(--font-display); font-weight: 700; font-size: 1rem;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 8px 30px rgba(0,198,224,0.35);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,198,224,0.5); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--white); border: 1.5px solid rgba(255,255,255,0.2);
+    padding: 14px 32px; border-radius: 40px;
+    font-family: var(--font-display); font-weight: 600; font-size: 1rem;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--ice); color: var(--ice); }
+  .hero-stats {
+    display: flex; gap: 40px; margin-top: 60px;
+  }
+  .stat-item { }
+  .stat-num {
+    font-family: var(--font-display); font-weight: 900;
+    font-size: 2rem; color: var(--ice);
+  }
+  .stat-label { font-size: 0.85rem; color: var(--muted); margin-top: 2px; }
+
+  /* ── SERVICES ── */
+  #services {
+    padding: 100px 5vw;
+    background: var(--night-mid);
+  }
+  .section-label {
+    text-align: center; color: var(--ice);
+    font-size: 0.85rem; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: var(--font-display); font-weight: 900;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    text-align: center; margin-bottom: 60px;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px; max-width: 1100px; margin: 0 auto;
+  }
+  .service-card {
+    background: var(--night);
+    border: 1px solid rgba(0,198,224,0.1);
+    border-radius: var(--radius);
+    padding: 36px 28px;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .service-card::before {
+    content: ''; position: absolute; top: 0; right: 0; left: 0; height: 3px;
+    background: linear-gradient(90deg, var(--ice), var(--ice-dark));
+    transform: scaleX(0); transform-origin: right;
+    transition: transform 0.3s;
+  }
+  .service-card:hover { transform: translateY(-6px); border-color: rgba(0,198,224,0.3); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-icon {
+    width: 60px; height: 60px; border-radius: 16px;
+    background: linear-gradient(135deg, rgba(0,198,224,0.15), rgba(0,198,224,0.05));
+    border: 1px solid rgba(0,198,224,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem; margin-bottom: 24px;
+  }
+  .service-card h3 {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: 1.25rem; margin-bottom: 8px; color: var(--white);
+  }
+  .service-card .en-label {
+    color: var(--ice); font-size: 0.8rem; font-weight: 600;
+    letter-spacing: 1px; margin-bottom: 20px;
+  }
+  .service-list { list-style: none; }
+  .service-list li {
+    padding: 8px 0; color: var(--muted); font-size: 0.95rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex; align-items: flex-start; gap: 10px;
+  }
+  .service-list li:last-child { border-bottom: none; }
+  .service-list li::before {
+    content: '✓'; color: var(--green);
+    font-weight: 700; flex-shrink: 0; margin-top: 2px;
+  }
+
+  /* ── WHY US ── */
+  #why {
+    padding: 100px 5vw;
+    background: var(--night);
+  }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px; max-width: 1000px; margin: 0 auto;
+  }
+  .why-card {
+    text-align: center; padding: 32px 20px;
+    background: var(--night-mid);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: var(--radius);
+  }
+  .why-card .icon { font-size: 2.5rem; margin-bottom: 16px; }
+  .why-card h4 {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: 1.05rem; margin-bottom: 8px;
+  }
+  .why-card p { color: var(--muted); font-size: 0.9rem; }
+
+  /* ── BOOKING ── */
+  #booking {
+    padding: 100px 5vw;
+    background: linear-gradient(135deg, var(--night-mid) 0%, var(--slate) 100%);
+    position: relative; overflow: hidden;
+  }
+  #booking::before {
+    content: ''; position: absolute;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,198,224,0.1), transparent 70%);
+    top: -200px; left: -100px;
+  }
+  .booking-wrap {
+    max-width: 680px; margin: 0 auto; position: relative; z-index: 1;
+  }
+  .form-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    margin-top: 40px;
+  }
+  .form-group { display: flex; flex-direction: column; gap: 8px; }
+  .form-group.full { grid-column: 1/-1; }
+  .form-group label { font-size: 0.9rem; color: var(--muted); font-weight: 500; }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: rgba(255,255,255,0.05);
+    border: 1.5px solid rgba(255,255,255,0.1);
+    border-radius: 12px; padding: 14px 16px;
+    color: var(--white); font-family: var(--font-body); font-size: 1rem;
+    outline: none; transition: border-color 0.2s, background 0.2s;
+    direction: rtl;
+  }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: rgba(255,255,255,0.25); }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--ice);
+    background: rgba(0,198,224,0.05);
+  }
+  .form-group select option { background: var(--night-mid); color: var(--white); }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .btn-submit {
+    width: 100%; margin-top: 8px;
+    background: linear-gradient(135deg, var(--ice), var(--ice-dark));
+    color: var(--night); border: none; cursor: pointer;
+    padding: 16px; border-radius: 40px;
+    font-family: var(--font-display); font-weight: 800; font-size: 1.05rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 8px 30px rgba(0,198,224,0.3);
+  }
+  .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,198,224,0.5); }
+  .success-msg {
+    display: none; text-align: center; padding: 20px;
+    background: rgba(0,214,143,0.1); border: 1px solid rgba(0,214,143,0.3);
+    border-radius: 12px; color: var(--green); font-weight: 600; margin-top: 16px;
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    padding: 100px 5vw;
+    background: var(--night);
+  }
+  .contact-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px; max-width: 900px; margin: 40px auto 0;
+  }
+  .contact-card {
+    background: var(--night-mid);
+    border: 1px solid rgba(0,198,224,0.1);
+    border-radius: var(--radius); padding: 32px 24px;
+    display: flex; align-items: center; gap: 20px;
+    text-decoration: none; color: var(--white);
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .contact-card:hover { transform: translateY(-4px); border-color: rgba(0,198,224,0.4); }
+  .contact-icon {
+    width: 54px; height: 54px; border-radius: 14px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; font-size: 1.6rem;
+  }
+  .contact-icon.wa { background: rgba(37,211,102,0.15); }
+  .contact-icon.ph { background: rgba(0,198,224,0.15); }
+  .contact-icon.loc { background: rgba(255,184,0,0.15); }
+  .contact-card-text span { color: var(--muted); font-size: 0.8rem; display: block; margin-bottom: 4px; }
+  .contact-card-text strong { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--night-mid);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 32px 5vw;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px;
+  }
+  footer p { color: var(--muted); font-size: 0.85rem; }
+  footer .footer-logo { font-family: var(--font-display); font-weight: 900; color: var(--ice); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav ul { display: none; }
+    .hero-stats { gap: 24px; flex-wrap: wrap; }
+    .form-grid { grid-template-columns: 1fr; }
+    .form-group.full { grid-column: 1; }
+    footer { flex-direction: column; text-align: center; }
+  }
+
+  /* Scroll animation */
+  .fade-in {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <div class="logo-icon">❄️</div>
+    Cool <span>&</span> Safe
+  </div>
+  <ul>
+    <li><a href="#services">خدماتنا</a></li>
+    <li><a href="#why">لماذا نحن</a></li>
+    <li><a href="#booking">احجز موعد</a></li>
+    <li><a href="#contact" class="nav-cta">تواصل معنا</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="circle c1"></div>
+  <div class="circle c2"></div>
+  <div class="hero-content">
+    <div class="hero-badge">كربلاء المقدسة</div>
+    <h1>
+      <span class="line1">راحتك</span>
+      <span class="line2">مسؤوليتنا</span>
+    </h1>
+    <p class="hero-desc">
+      وجهتك المتكاملة لصيانة التكييف، الأنظمة الأمنية، والستلايت — بجودة تدوم وخدمة تثق بها في كربلاء المقدسة.
+    </p>
+    <div class="hero-btns">
+      <a href="#booking" class="btn-primary">📅 احجز موعد الآن</a>
+      <a href="https://wa.me/9647712170637" class="btn-secondary" target="_blank">💬 واتساب</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">+500</div>
+        <div class="stat-label">عميل راضٍ</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3</div>
+        <div class="stat-label">خدمات متكاملة</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">24/7</div>
+        <div class="stat-label">دعم متواصل</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label fade-in">ما نقدمه</div>
+  <h2 class="section-title fade-in">خدماتنا</h2>
+  <div class="services-grid">
+    <div class="service-card fade-in">
+      <div class="service-icon">❄️</div>
+      <h3>التبريد والتكييف</h3>
+      <div class="en-label">Cooling & AC</div>
+      <ul class="service-list">
+        <li>تنصيب وصيانة السبالت والثلاجات والمجمدات</li>
+        <li>غسيل احترافي لضمان أعلى كفاءة تبريد</li>
+        <li>شحن غاز أصلي لبرودة تدوم طويلاً</li>
+      </ul>
+    </div>
+    <div class="service-card fade-in">
+      <div class="service-icon">🛡️</div>
+      <h3>الأنظمة الأمنية</h3>
+      <div class="en-label">Security Systems</div>
+      <ul class="service-list">
+        <li>تنصيب أحدث كاميرات Dahua و Hikvision</li>
+        <li>ربط الكاميرات بهاتفك لمراقبة بيتك من أي مكان</li>
+        <li>تأمين المنازل والمحلات التجارية</li>
+      </ul>
+    </div>
+    <div class="service-card fade-in">
+      <div class="service-icon">📡</div>
+      <h3>الستلايت والشاشات</h3>
+      <div class="en-label">Satellite & TV</div>
+      <ul class="service-list">
+        <li>تنصيب وبرمجة أطباق الستلايت بأحدث الأجهزة</li>
+        <li>ضبط الإشارة للحصول على أوضح استقبال</li>
+        <li>تثبيت الشاشات بشكل احترافي وآمن</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="section-label fade-in">ثقتك أولويتنا</div>
+  <h2 class="section-title fade-in">لماذا تختارنا؟</h2>
+  <div class="why-grid">
+    <div class="why-card fade-in">
+      <div class="icon">⚡</div>
+      <h4>سرعة الاستجابة</h4>
+      <p>نصل إليك في أقرب وقت ممكن دون انتظار طويل</p>
+    </div>
+    <div class="why-card fade-in">
+      <div class="icon">🔧</div>
+      <h4>فنيون محترفون</h4>
+      <p>فريق متخصص بخبرة واسعة في جميع الخدمات</p>
+    </div>
+    <div class="why-card fade-in">
+      <div class="icon">💎</div>
+      <h4>جودة مضمونة</h4>
+      <p>نستخدم قطع غيار أصلية ونضمن جودة العمل</p>
+    </div>
+    <div class="why-card fade-in">
+      <div class="icon">💰</div>
+      <h4>أسعار مناسبة</h4>
+      <p>خدمة عالية الجودة بأسعار تناسب الجميع</p>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section id="booking">
+  <div class="booking-wrap">
+    <div class="section-label fade-in">بدون انتظار</div>
+    <h2 class="section-title fade-in">احجز موعدك</h2>
+    <div class="form-grid fade-in" id="bookingForm">
+      <div class="form-group">
+        <label>👤 الاسم الكريم</label>
+        <input type="text" placeholder="أدخل اسمك" id="fname">
+      </div>
+      <div class="form-group">
+        <label>📞 رقم الهاتف</label>
+        <input type="tel" placeholder="07X XXXX XXXX" id="fphone">
+      </div>
+      <div class="form-group">
+        <label>🔧 نوع الخدمة</label>
+        <select id="fservice">
+          <option value="">— اختر الخدمة —</option>
+          <option>تبريد وتكييف</option>
+          <option>أنظمة أمنية</option>
+          <option>ستلايت وشاشات</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>📍 العنوان في كربلاء</label>
+        <input type="text" placeholder="الحي / الشارع" id="faddress">
+      </div>
+      <div class="form-group full">
+        <label>📝 ملاحظات إضافية (اختياري)</label>
+        <textarea placeholder="وصف المشكلة أو أي تفاصيل تساعدنا..." id="fnotes"></textarea>
+      </div>
+      <div class="form-group full">
+        <button class="btn-submit" onclick="submitBooking()">📅 تأكيد الحجز</button>
+      </div>
+    </div>
+    <div class="success-msg" id="successMsg">
+      ✅ تم استلام طلبك! سنتواصل معك قريباً لتأكيد الموعد.
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label fade-in">نحن هنا</div>
+  <h2 class="section-title fade-in">تواصل معنا</h2>
+  <div class="contact-cards">
+    <a href="https://wa.me/9647712170637" class="contact-card fade-in" target="_blank">
+      <div class="contact-icon wa">💬</div>
+      <div class="contact-card-text">
+        <span>واتساب</span>
+        <strong>راسلنا الآن</strong>
+      </div>
+    </a>
+    <a href="tel:07712170637" class="contact-card fade-in">
+      <div class="contact-icon ph">📞</div>
+      <div class="contact-card-text">
+        <span>اتصال مباشر</span>
+        <strong>07712170637</strong>
+      </div>
+    </a>
+    <div class="contact-card fade-in">
+      <div class="contact-icon loc">📍</div>
+      <div class="contact-card-text">
+        <span>موقعنا</span>
+        <strong>كربلاء المقدسة</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">❄️ Cool & Safe</div>
+  <p>جميع الحقوق محفوظة © 2025 — كربلاء المقدسة</p>
+  <p style="color:var(--muted); font-size:0.8rem">راحتك مسؤوليتنا</p>
+</footer>
+
+<script>
+  // Fade in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Booking form
+  function submitBooking() {
+    const name = document.getElementById('fname').value.trim();
+    const phone = document.getElementById('fphone').value.trim();
+    const service = document.getElementById('fservice').value;
+    const address = document.getElementById('faddress').value.trim();
+    if (!name || !phone || !service || !address) {
+      alert('يرجى تعبئة الحقول المطلوبة');
+      return;
+    }
+    const msg = `طلب حجز جديد 📋\n\n👤 الاسم: ${name}\n📞 الهاتف: ${phone}\n🔧 الخدمة: ${service}\n📍 العنوان: ${address}\n📝 ملاحظات: ${document.getElementById('fnotes').value || 'لا يوجد'}`;
+    const encoded = encodeURIComponent(msg);
+    window.open(`https://wa.me/9647712170637?text=${encoded}`, '_blank');
+    document.getElementById('successMsg').style.display = 'block';
+  }
+</script>
+</body>
+</html>
